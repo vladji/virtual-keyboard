@@ -1,4 +1,7 @@
-import App from './components/App';
+import View from './components/View';
+import Controller from './components/Conroller';
 
-const app = new App();
-app.start();
+View.textAreaInit();
+
+const control = new Controller();
+control.keyTouch();
