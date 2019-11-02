@@ -1,7 +1,63 @@
 body {
+  margin-top: 70px;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
   background: #ccc;
+}
+
+.textarea {
+  width: 670px;
+  height: 200px;
 }
 
 .row {
   display: flex;
+  justify-content: center;
+
+  div {
+    display: flex;
+    width: 40px;
+    height: 40px;
+    margin: 2px;
+    align-items: center;
+    justify-content: center;
+    color: #f0f0f0;
+    background: #333;
+  }
+
+  .backspace,
+  .shift-r {
+    width: 100px;
+  }
+
+  .tab {
+    width: 45px;
+  }
+
+  .del,
+  .win {
+    width: 50px;
+  }
+
+  .caps {
+    width: 95px;
+  }
+
+  .enter {
+    width: 90px;
+  }
+
+  .shift-l {
+    width: 85px;
+  }
+
+  .alt,
+  .ctrl {
+    width: 55px;
+  }
+
+  .space {
+    width: 250px;
+  }
 }

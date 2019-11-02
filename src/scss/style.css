@@ -1,10 +1,74 @@
 body {
+  margin-top: 70px;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
   background: #ccc;
+}
+
+.textarea {
+  width: 670px;
+  height: 200px;
 }
 
 .row {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.row div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 40px;
+  height: 40px;
+  margin: 2px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  color: #f0f0f0;
+  background: #333;
+}
+
+.row .backspace,
+.row .shift-r {
+  width: 100px;
+}
+
+.row .tab {
+  width: 45px;
+}
+
+.row .del,
+.row .win {
+  width: 50px;
+}
+
+.row .caps {
+  width: 95px;
+}
+
+.row .enter {
+  width: 90px;
+}
+
+.row .shift-l {
+  width: 85px;
+}
+
+.row .alt,
+.row .ctrl {
+  width: 55px;
+}
+
+.row .space {
+  width: 250px;
 }
 /*# sourceMappingURL=style.css.map */
