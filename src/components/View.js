@@ -2,7 +2,7 @@ import '../scss/style.css';
 
 export default class View {
   constructor() {
-    this.keysWrap = null;
+    this.upperCase = false;
   }
 
   static textAreaInit() {
@@ -11,9 +11,8 @@ export default class View {
     document.body.append(form);
   }
 
-  keybordInit(keysArr) {
-    let keybordWrap = this.keysWrap;
-    keybordWrap = document.createElement('div');
+  static keybordInit(keysArr) {
+    const keybordWrap = document.createElement('div');
     keybordWrap.classList = 'keybord-wrap';
 
     for (let i = 0; i < 5;) {
@@ -38,15 +37,25 @@ export default class View {
     }
   }
 
-  pastKey(keysArr) {
-    const keybord = this.keysWrap;
-    console.log('keybord', keybord);
-    console.log('keysArr', keysArr);
-  }
+  capsLock() {
+    const switchKeys = document.querySelectorAll('.switch');
 
-  // capsLock() {
-  //   let keybordWrap = this.keysWrap;
-  //   const upper = keysArr[1].join(',').toUpperCase().split(',');
-  //   console.log(upper);
-  // }
+    if (this.upperCase) {
+      for (let i = 0; i < switchKeys.length;) {
+        let letter = switchKeys[i].innerHTML;
+        letter = letter.toLowerCase();
+        switchKeys[i].innerHTML = letter;
+        i += 1;
+      }
+      this.upperCase = false;
+    } else {
+      for (let i = 0; i < switchKeys.length;) {
+        let letter = switchKeys[i].innerHTML;
+        letter = letter.toUpperCase();
+        switchKeys[i].innerHTML = letter;
+        i += 1;
+      }
+      this.upperCase = true;
+    }
+  }
 }

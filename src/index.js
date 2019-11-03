@@ -4,4 +4,4 @@ import Controller from './components/Conroller';
 View.textAreaInit();
 
 const control = new Controller();
-control.keyTouch();
+control.lesteners();

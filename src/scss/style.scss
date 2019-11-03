@@ -11,6 +11,10 @@ body {
   height: 200px;
 }
 
+.keybord-wrap {
+  display: inline-block;
+}
+
 .row {
   display: flex;
   justify-content: center;
@@ -22,12 +26,27 @@ body {
     margin: 2px;
     align-items: center;
     justify-content: center;
+    border-radius: 3px;
     color: #f0f0f0;
     background: #333;
+    cursor: pointer;
+    animation: .1s ease-out;
   }
 
-  .backspace,
-  .shift-r {
+  .animation-key {
+    animation-name: anime;
+  }
+
+  @keyframes anime {
+    from {
+      background: #333333;
+    }
+    to {
+      background: #494949;
+    }
+  }
+
+  .backspace {
     width: 100px;
   }
 
@@ -48,7 +67,11 @@ body {
     width: 90px;
   }
 
-  .shift-l {
+  .shift:first-child {
+    width: 100px;
+  }
+
+  .shift:last-child {
     width: 85px;
   }
 

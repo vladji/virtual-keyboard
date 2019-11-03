@@ -11,6 +11,10 @@ body {
   height: 200px;
 }
 
+.keybord-wrap {
+  display: inline-block;
+}
+
 .row {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -33,12 +37,38 @@ body {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  border-radius: 3px;
   color: #f0f0f0;
   background: #333;
+  cursor: pointer;
+  -webkit-animation: .1s ease-out;
+          animation: .1s ease-out;
 }
 
-.row .backspace,
-.row .shift-r {
+.row .animation-key {
+  -webkit-animation-name: anime;
+          animation-name: anime;
+}
+
+@-webkit-keyframes anime {
+  from {
+    background: #333333;
+  }
+  to {
+    background: #494949;
+  }
+}
+
+@keyframes anime {
+  from {
+    background: #333333;
+  }
+  to {
+    background: #494949;
+  }
+}
+
+.row .backspace {
   width: 100px;
 }
 
@@ -59,7 +89,11 @@ body {
   width: 90px;
 }
 
-.row .shift-l {
+.row .shift:first-child {
+  width: 100px;
+}
+
+.row .shift:last-child {
   width: 85px;
 }
 
