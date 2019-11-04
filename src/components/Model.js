@@ -13,15 +13,23 @@ export default class Model {
     View.keybordInit(keysArr);
   }
 
-  mouseClick(e) {
-    const input = this.textArea;
-    if (e.target.classList.contains('row')) return 0;
-
+  static animation(e) {
     e.target.classList.add('animation-key');
     setTimeout(() => e.target.classList.remove('animation-key'), 300);
+  }
 
+  static mouseUp(e) {
+    e.target.classList.remove('pressed-btn');
+  }
+
+  mouseDown(e) {
+    const input = this.textArea;
     const keyClasses = e.target.classList;
     const keyValue = e.target.innerHTML;
+
+    keyClasses.add('pressed-btn');
+
+    if (keyClasses.contains('shift')) Model.shift(e);
 
     if (keyClasses.contains('print')) {
       input.value += keyValue;
@@ -61,13 +69,12 @@ export default class Model {
     return 1;
   }
 
-  static shift() {
-    const shift = document.querySelector('.shift');
+  static shift(e) {
     const style = document.createElement('style');
     style.innerHTML = '.switch {text-transform: uppercase;}';
     document.body.prepend(style);
 
-    shift.addEventListener('mouseup', () => {
+    e.target.addEventListener('mouseup', () => {
       style.remove();
     });
   }

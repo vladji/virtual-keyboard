@@ -30,10 +30,12 @@ body {
     color: #f0f0f0;
     background: #333;
     cursor: pointer;
-    animation: .3s ease-in;
+    transition: background 0.3s ease-out;
+    animation: 0.3s ease-in;
 
     &:hover {
       background: linear-gradient(to bottom left, #494949 60%, #636262);
+      // background: #494949;
     }
   }
 
@@ -43,15 +45,19 @@ body {
 
   @keyframes anime {
     0% {
+      color: #ff7600;
       background: #636262;
     }
     35% {
+      color: #ff7600;
       background: #7e7e7e;
     }
     75% {
+      color: #ff7600;
       background: #636262;
     }
     100% {
+      color: #ff7600;
       background: #494949;
     }
   }
@@ -70,19 +76,20 @@ body {
   }
 
   .caps {
-    width: 95px;
+    width: 80px;
+    font-size: 14px !important;
   }
 
   .enter {
-    width: 90px;
+    width: 105px;
   }
 
   .shift:first-child {
-    width: 100px;
+    width: 85px;
   }
 
   .shift:last-child {
-    width: 85px;
+    width: 100px;
   }
 
   .alt,
@@ -92,5 +99,21 @@ body {
 
   .space {
     width: 250px;
+  }
+
+  .backspace,
+  .tab,
+  .del,
+  .win,
+  .caps,
+  .enter,
+  .shift,
+  .alt,
+  .ctrl {
+    font-size: 16px;
+  }
+
+  .pressed-btn {
+    color: #ff7600;
   }
 }

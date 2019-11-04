@@ -19,12 +19,20 @@ export default class Controller {
     model.keybordInit();
 
     const keybord = document.querySelector('.keybord-wrap');
-    keybord.addEventListener('click', model.mouseClick.bind(model));
+    let repeatLetter = null;
+    keybord.addEventListener('mousedown', (e) => {
+      if (e.target.classList.contains('row')) return 0;
+      Model.animation(e);
+      model.mouseDown(e);
+      repeatLetter = setInterval(() => model.mouseDown(e), 100);
+      return 1;
+    });
+    keybord.addEventListener('mouseup', (e) => {
+      clearInterval(repeatLetter);
+      Model.mouseUp(e);
+    });
 
     const input = this.textArea;
     input.addEventListener('click', model.inputClick.bind(model));
-
-    const shift = document.querySelector('.shift');
-    shift.addEventListener('mousedown', Model.shift);
   }
 }
