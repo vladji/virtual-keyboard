@@ -13,21 +13,21 @@ export default class Model {
     View.keybordInit(keysArr);
   }
 
-  static animation(e) {
-    e.target.classList.add('animation-key');
-    setTimeout(() => e.target.classList.remove('animation-key'), 300);
+  static animation(e, key) {
+    const target = (e) ? e.target : key;
+    target.classList.add('animation-key', 'pressed-btn');
+    setTimeout(() => target.classList.remove('animation-key'), 300);
   }
 
-  static mouseUp(e) {
-    e.target.classList.remove('pressed-btn');
+  static keyUp(e, key) {
+    const target = (e) ? e.target : key;
+    target.classList.remove('pressed-btn');
   }
 
   mouseDown(e) {
     const input = this.textArea;
     const keyClasses = e.target.classList;
     const keyValue = e.target.innerHTML;
-
-    keyClasses.add('pressed-btn');
 
     if (keyClasses.contains('shift')) Model.shift(e);
 
@@ -66,6 +66,11 @@ export default class Model {
     } else if (keyClasses.contains('caps')) {
       this.view.capsLock();
     }
+
+    e.target.addEventListener('selectstart', (evt) => {
+      evt.preventDefault();
+    });
+
     return 1;
   }
 
@@ -82,6 +87,17 @@ export default class Model {
   inputClick() {
     const input = this.textArea;
     this.cursorPos = input.selectionEnd;
-    console.log('this.cursorPos', this.cursorPos);
+  }
+
+  static keyDown(e) {
+    console.log(e.type, e.key, e.code);
+    const key = document.querySelector(`.${e.code}`);
+    if (key && !e.repeat) {
+      Model.animation(null, key);
+    }
+
+    // if (e.code === 'Tab') {
+    //   e.preventDefault();
+    // }
   }
 }
