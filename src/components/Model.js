@@ -18,7 +18,7 @@ export default class Model {
     if (e.target.classList.contains('row')) return 0;
 
     e.target.classList.add('animation-key');
-    setTimeout(() => e.target.classList.remove('animation-key'), 100);
+    setTimeout(() => e.target.classList.remove('animation-key'), 300);
 
     const keyClasses = e.target.classList;
     const keyValue = e.target.innerHTML;

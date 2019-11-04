@@ -30,7 +30,11 @@ body {
     color: #f0f0f0;
     background: #333;
     cursor: pointer;
-    animation: .1s ease-out;
+    animation: .3s ease-in;
+
+    &:hover {
+      background: linear-gradient(to bottom left, #494949 60%, #636262);
+    }
   }
 
   .animation-key {
@@ -38,10 +42,16 @@ body {
   }
 
   @keyframes anime {
-    from {
-      background: #333333;
+    0% {
+      background: #636262;
     }
-    to {
+    35% {
+      background: #7e7e7e;
+    }
+    75% {
+      background: #636262;
+    }
+    100% {
       background: #494949;
     }
   }
