@@ -40,6 +40,11 @@ export default class View {
       }
       k += 1;
     }
+
+    const info = document.createElement('p');
+    info.classList = 'info';
+    info.innerHTML = '<span>Alt + Shift</span>: to switch language';
+    document.body.append(info);
   }
 
   transform(caps) {

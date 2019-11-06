@@ -50,7 +50,7 @@ export default class Model {
 
     // * SPACE
     if (target.matches('.space')) {
-      const space = '\0';
+      const space = ' ';
       input.value = input.value.slice(0, pos)
         + space + input.value.slice(pos, input.value.length);
       this.cursorPos += 1;
