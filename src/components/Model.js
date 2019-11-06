@@ -1,7 +1,5 @@
 import View from './View';
 
-const symbols = ['~', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '+', '\\', ','];
-
 export default class Model {
   constructor(keysDef) {
     this.view = new View();
@@ -9,6 +7,7 @@ export default class Model {
     this.textArea = document.querySelector('.textarea');
     this.cursorPos = 0;
     this.caps = 0;
+    this.switch = false;
   }
 
   keybordInit() {
@@ -29,7 +28,7 @@ export default class Model {
 
   keyUp(e) {
     const target = (e.target) ? e.target : e;
-    if (target.classList.contains('caps') && this.caps) return false;
+    if (target.matches('.caps') && this.caps) return false;
     return target.classList.remove('pressed-btn');
   }
 
@@ -37,18 +36,17 @@ export default class Model {
     const target = (e.target) ? e.target : e;
     const input = this.textArea;
     const pos = this.cursorPos;
-    const keyClasses = target.classList;
     const keyValue = target.innerHTML;
 
     // * PRINT
-    if (keyClasses.contains('print')) {
+    if (target.matches('.print')) {
       input.value = input.value.slice(0, pos)
         + keyValue + input.value.slice(pos, input.value.length);
       this.cursorPos += 1;
     }
 
     // * SPACE
-    if (keyClasses.contains('space')) {
+    if (target.matches('.space')) {
       const space = '\0';
       input.value = input.value.slice(0, pos)
         + space + input.value.slice(pos, input.value.length);
@@ -56,13 +54,13 @@ export default class Model {
     }
 
     // * CAPS
-    if (keyClasses.contains('caps')) {
-      this.view.transform();
+    if (target.matches('.caps')) {
       this.caps = (this.caps) ? 0 : 1;
+      this.view.transform(this.caps);
     }
 
     // ? TAB
-    if (keyClasses.contains('tab')) {
+    if (target.matches('.tab')) {
       const tab = '\t';
       input.value = input.value.slice(0, pos)
         + tab + input.value.slice(pos, input.value.length);
@@ -70,13 +68,13 @@ export default class Model {
     }
 
     // * ENTER
-    if (keyClasses.contains('enter')) {
+    if (target.matches('.enter')) {
       input.value += '\n';
       this.cursorPos = input.selectionEnd;
     }
 
     // * DEL
-    if (keyClasses.contains('del')) {
+    if (target.matches('.del')) {
       if (this.cursorPos) {
         input.value = input.value.slice(0, this.cursorPos)
           + input.value.slice(this.cursorPos + 1, input.value.length);
@@ -89,7 +87,7 @@ export default class Model {
     }
 
     // * BACKSPACE
-    if (keyClasses.contains('backspace')) {
+    if (target.matches('.backspace')) {
       if (this.cursorPos) {
         input.value = input.value.slice(0, this.cursorPos - 1)
           + input.value.slice(this.cursorPos, input.value.length);
@@ -98,8 +96,19 @@ export default class Model {
     }
   }
 
-  shift() {
-    this.view.changeSymb(symbols);
-    this.view.transform();
+  shift(set) {
+    if (set === 2) return false;
+
+    if (!this.switch) {
+      this.view.changeSymb();
+      this.caps = (this.caps) ? 0 : 1;
+      this.view.transform(this.caps);
+    }
+    return 1;
+  }
+
+  changeLang() {
+    this.view.switchLang();
+    this.switch = true;
   }
 }
