@@ -51,8 +51,6 @@ export default class Controller {
       model.keyUp(e);
     });
 
-    input.addEventListener('click', model.inputClick.bind(model));
-
     document.body.addEventListener('keydown', (e) => {
       const key = document.querySelector(`.${e.code}`);
 
@@ -85,6 +83,14 @@ export default class Controller {
         }
         this.set.clear();
       }
+    });
+
+    input.addEventListener('click', model.inputClick.bind(model));
+
+    input.addEventListener('select', () => {
+      console.log('select');
+      console.log(input.selectionStart);
+      console.log(input.selectionEnd);
     });
   }
 }

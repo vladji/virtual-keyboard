@@ -78,6 +78,11 @@ export default class Model {
 
     // * DEL
     if (target.matches('.del')) {
+      if (input.selectionStart !== input.selectionEnd) {
+        this.cursorPos = input.selectionStart;
+        input.value = input.value.slice(0, input.selectionStart)
+          + input.value.slice(input.selectionEnd - 1, input.value.length);
+      }
       if (this.cursorPos) {
         input.value = input.value.slice(0, this.cursorPos)
           + input.value.slice(this.cursorPos + 1, input.value.length);
@@ -91,6 +96,11 @@ export default class Model {
 
     // * BACKSPACE
     if (target.matches('.backspace')) {
+      if (input.selectionStart !== input.selectionEnd) {
+        this.cursorPos = input.selectionStart;
+        input.value = input.value.slice(0, input.selectionStart - 1)
+          + input.value.slice(input.selectionEnd, input.value.length);
+      }
       if (this.cursorPos) {
         input.value = input.value.slice(0, this.cursorPos - 1)
           + input.value.slice(this.cursorPos, input.value.length);
