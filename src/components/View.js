@@ -82,10 +82,10 @@ export default class View {
     }
   }
 
-  switchLang() {
+  switchLang(lang) {
     const letters = document.querySelectorAll('.switch');
 
-    if (this.ruLang.length === 0) {
+    if (lang === 'en') {
       for (let k = 0; k < engLang.length;) {
         this.ruLang.push(letters[k].innerHTML);
         letters[k].innerHTML = engLang[k];

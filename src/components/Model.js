@@ -3,11 +3,14 @@ import View from './View';
 export default class Model {
   constructor(keysDef) {
     this.view = new View();
+    this.grabStore();
     this.keysDefault = keysDef;
     this.textArea = document.querySelector('.textarea');
     this.cursorPos = 0;
     this.caps = 0;
     this.switch = false;
+    this.lang = 'ru';
+    this.store = {};
   }
 
   keybordInit() {
@@ -108,7 +111,35 @@ export default class Model {
   }
 
   changeLang() {
-    this.view.switchLang();
+    this.lang = (this.lang === 'ru') ? 'en' : 'ru';
+    this.view.switchLang(this.lang);
     this.switch = true;
+  }
+
+  grabStore() {
+    window.addEventListener('load', () => {
+      if (localStorage.getItem('storeKey')) {
+        const storeObj = JSON.parse(localStorage.getItem('storeKey'));
+
+        if (storeObj.language === 'en') {
+          this.lang = 'en';
+          this.view.switchLang(this.lang);
+        }
+        if (storeObj.caps) {
+          this.caps = 1;
+          this.view.transform(this.caps);
+          const capsKey = document.querySelector('.caps');
+          capsKey.classList.add('pressed-btn');
+        }
+      }
+    });
+
+    window.addEventListener('beforeunload', () => {
+      this.store.caps = this.caps;
+      this.store.language = this.lang;
+
+      const storeObj = JSON.stringify(this.store);
+      localStorage.setItem('storeKey', storeObj);
+    });
   }
 }
