@@ -1,14 +1,16 @@
 import View from './View';
 
-const symbols = ['~', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '+', '\\', ','];
-
 export default class Model {
   constructor(keysDef) {
     this.view = new View();
+    this.grabStore();
     this.keysDefault = keysDef;
     this.textArea = document.querySelector('.textarea');
     this.cursorPos = 0;
     this.caps = 0;
+    this.switch = false;
+    this.lang = 'ru';
+    this.store = {};
   }
 
   keybordInit() {
@@ -29,7 +31,7 @@ export default class Model {
 
   keyUp(e) {
     const target = (e.target) ? e.target : e;
-    if (target.classList.contains('caps') && this.caps) return false;
+    if (target.matches('.caps') && this.caps) return false;
     return target.classList.remove('pressed-btn');
   }
 
@@ -37,32 +39,31 @@ export default class Model {
     const target = (e.target) ? e.target : e;
     const input = this.textArea;
     const pos = this.cursorPos;
-    const keyClasses = target.classList;
     const keyValue = target.innerHTML;
 
     // * PRINT
-    if (keyClasses.contains('print')) {
+    if (target.matches('.print')) {
       input.value = input.value.slice(0, pos)
         + keyValue + input.value.slice(pos, input.value.length);
       this.cursorPos += 1;
     }
 
     // * SPACE
-    if (keyClasses.contains('space')) {
-      const space = '\0';
+    if (target.matches('.space')) {
+      const space = ' ';
       input.value = input.value.slice(0, pos)
         + space + input.value.slice(pos, input.value.length);
       this.cursorPos += 1;
     }
 
     // * CAPS
-    if (keyClasses.contains('caps')) {
-      this.view.transform();
+    if (target.matches('.caps')) {
       this.caps = (this.caps) ? 0 : 1;
+      this.view.transform(this.caps);
     }
 
     // ? TAB
-    if (keyClasses.contains('tab')) {
+    if (target.matches('.tab')) {
       const tab = '\t';
       input.value = input.value.slice(0, pos)
         + tab + input.value.slice(pos, input.value.length);
@@ -70,13 +71,18 @@ export default class Model {
     }
 
     // * ENTER
-    if (keyClasses.contains('enter')) {
+    if (target.matches('.enter')) {
       input.value += '\n';
       this.cursorPos = input.selectionEnd;
     }
 
     // * DEL
-    if (keyClasses.contains('del')) {
+    if (target.matches('.del')) {
+      if (input.selectionStart !== input.selectionEnd) {
+        this.cursorPos = input.selectionStart;
+        input.value = input.value.slice(0, input.selectionStart)
+          + input.value.slice(input.selectionEnd - 1, input.value.length);
+      }
       if (this.cursorPos) {
         input.value = input.value.slice(0, this.cursorPos)
           + input.value.slice(this.cursorPos + 1, input.value.length);
@@ -89,7 +95,12 @@ export default class Model {
     }
 
     // * BACKSPACE
-    if (keyClasses.contains('backspace')) {
+    if (target.matches('.backspace')) {
+      if (input.selectionStart !== input.selectionEnd) {
+        this.cursorPos = input.selectionStart;
+        input.value = input.value.slice(0, input.selectionStart - 1)
+          + input.value.slice(input.selectionEnd, input.value.length);
+      }
       if (this.cursorPos) {
         input.value = input.value.slice(0, this.cursorPos - 1)
           + input.value.slice(this.cursorPos, input.value.length);
@@ -98,8 +109,47 @@ export default class Model {
     }
   }
 
-  shift() {
-    this.view.changeSymb(symbols);
-    this.view.transform();
+  shift(set) {
+    if (set === 2) return false;
+
+    if (!this.switch) {
+      this.view.changeSymb();
+      this.caps = (this.caps) ? 0 : 1;
+      this.view.transform(this.caps);
+    }
+    return 1;
+  }
+
+  changeLang() {
+    this.lang = (this.lang === 'ru') ? 'en' : 'ru';
+    this.view.switchLang(this.lang);
+    this.switch = true;
+  }
+
+  grabStore() {
+    window.addEventListener('load', () => {
+      if (localStorage.getItem('storeKey')) {
+        const storeObj = JSON.parse(localStorage.getItem('storeKey'));
+
+        if (storeObj.language === 'en') {
+          this.lang = 'en';
+          this.view.switchLang(this.lang);
+        }
+        if (storeObj.caps) {
+          this.caps = 1;
+          this.view.transform(this.caps);
+          const capsKey = document.querySelector('.caps');
+          capsKey.classList.add('pressed-btn');
+        }
+      }
+    });
+
+    window.addEventListener('beforeunload', () => {
+      this.store.caps = this.caps;
+      this.store.language = this.lang;
+
+      const storeObj = JSON.stringify(this.store);
+      localStorage.setItem('storeKey', storeObj);
+    });
   }
 }
