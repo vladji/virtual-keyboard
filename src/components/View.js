@@ -3,6 +3,7 @@ import '../scss/style.css';
 export default class View {
   constructor() {
     this.upperCase = false;
+    this.defaultSymb = [];
   }
 
   static textAreaInit() {
@@ -37,7 +38,7 @@ export default class View {
     }
   }
 
-  capsLock() {
+  transform() {
     const switchKeys = document.querySelectorAll('.switch');
 
     if (this.upperCase) {
@@ -56,6 +57,24 @@ export default class View {
         i += 1;
       }
       this.upperCase = true;
+    }
+  }
+
+  changeSymb(symb) {
+    const keys = document.querySelectorAll('.symb');
+
+    if (this.defaultSymb.length === 0) {
+      for (let s = 0; s < keys.length;) {
+        this.defaultSymb.push(keys[s].innerHTML);
+        keys[s].innerHTML = symb[s];
+        s += 1;
+      }
+    } else {
+      for (let s = 0; s < keys.length;) {
+        keys[s].innerHTML = this.defaultSymb[s];
+        s += 1;
+      }
+      this.defaultSymb.length = 0;
     }
   }
 }
