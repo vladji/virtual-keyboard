@@ -1,6 +1,7 @@
 body {
-  margin-top: 70px;
-  text-align: center;
+  width: 680px;
+  margin: 70px auto 0;
+  text-align: left;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 18px;
   background: #ccc;
@@ -148,5 +149,13 @@ body {
 
 .row .pressed-btn {
   color: #ff7600;
+}
+
+.info {
+  font-size: 16px;
+}
+
+.info span {
+  font-size: 20px;
 }
 /*# sourceMappingURL=style.css.map */

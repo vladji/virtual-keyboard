@@ -1,9 +1,13 @@
 import '../scss/style.css';
 
+const symbols = ['~', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '+', '\\', ','];
+const engLang = ['`', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', '\'', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/'];
+
 export default class View {
   constructor() {
     this.upperCase = false;
     this.defaultSymb = [];
+    this.ruLang = [];
   }
 
   static textAreaInit() {
@@ -36,12 +40,17 @@ export default class View {
       }
       k += 1;
     }
+
+    const info = document.createElement('p');
+    info.classList = 'info';
+    info.innerHTML = '<span>Alt + Shift</span>: to switch language';
+    document.body.append(info);
   }
 
-  transform() {
+  transform(caps) {
     const switchKeys = document.querySelectorAll('.switch');
 
-    if (this.upperCase) {
+    if (!caps) {
       for (let i = 0; i < switchKeys.length;) {
         let letter = switchKeys[i].innerHTML;
         letter = letter.toLowerCase();
@@ -60,13 +69,13 @@ export default class View {
     }
   }
 
-  changeSymb(symb) {
+  changeSymb() {
     const keys = document.querySelectorAll('.symb');
 
     if (this.defaultSymb.length === 0) {
       for (let s = 0; s < keys.length;) {
         this.defaultSymb.push(keys[s].innerHTML);
-        keys[s].innerHTML = symb[s];
+        keys[s].innerHTML = symbols[s];
         s += 1;
       }
     } else {
@@ -76,5 +85,24 @@ export default class View {
       }
       this.defaultSymb.length = 0;
     }
+  }
+
+  switchLang(lang) {
+    const letters = document.querySelectorAll('.switch');
+
+    if (lang === 'en') {
+      for (let k = 0; k < engLang.length;) {
+        this.ruLang.push(letters[k].innerHTML);
+        letters[k].innerHTML = engLang[k];
+        k += 1;
+      }
+    } else {
+      for (let k = 0; k < this.ruLang.length;) {
+        letters[k].innerHTML = this.ruLang[k];
+        k += 1;
+      }
+      this.ruLang.length = 0;
+    }
+    this.transform(this.upperCase);
   }
 }
