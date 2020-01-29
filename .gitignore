@@ -1,2 +1,10 @@
-node_modules
-dist
+node_modules/
+src/
+.gitignore
+.babelrc
+.editorconfig
+.eslintrc
+package-lock
+package
+README
+webpack.config

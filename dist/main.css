@@ -1,0 +1,162 @@
+body {
+  width: 680px;
+  margin: 70px auto 0;
+  text-align: left;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  background: #ccc;
+}
+
+.textarea {
+  width: 670px;
+  height: 200px;
+}
+
+.keybord-wrap {
+  display: inline-block;
+}
+
+.row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.row div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 40px;
+  height: 40px;
+  margin: 2px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  border-radius: 3px;
+  color: #f0f0f0;
+  background: #333;
+  cursor: pointer;
+  -webkit-transition: background 0.3s ease-out;
+  transition: background 0.3s ease-out;
+  -webkit-animation: 0.3s ease-in;
+          animation: 0.3s ease-in;
+}
+
+.row div:hover {
+  background: -webkit-gradient(linear, right top, left bottom, color-stop(60%, #494949), to(#636262));
+  background: linear-gradient(to bottom left, #494949 60%, #636262);
+}
+
+.row .animation-key {
+  -webkit-animation-name: anime;
+          animation-name: anime;
+}
+
+@-webkit-keyframes anime {
+  0% {
+    color: #ff7600;
+    background: #636262;
+  }
+  35% {
+    color: #ff7600;
+    background: #7e7e7e;
+  }
+  75% {
+    color: #ff7600;
+    background: #636262;
+  }
+  100% {
+    color: #ff7600;
+    background: #494949;
+  }
+}
+
+@keyframes anime {
+  0% {
+    color: #ff7600;
+    background: #636262;
+  }
+  35% {
+    color: #ff7600;
+    background: #7e7e7e;
+  }
+  75% {
+    color: #ff7600;
+    background: #636262;
+  }
+  100% {
+    color: #ff7600;
+    background: #494949;
+  }
+}
+
+.row .backspace {
+  width: 100px;
+}
+
+.row .tab {
+  width: 45px;
+}
+
+.row .del,
+.row .win {
+  width: 50px;
+}
+
+.row .caps {
+  width: 80px;
+  font-size: 14px !important;
+}
+
+.row .enter {
+  width: 105px;
+}
+
+.row .shift:first-child {
+  width: 85px;
+}
+
+.row .shift:last-child {
+  width: 100px;
+}
+
+.row .alt,
+.row .ctrl {
+  width: 55px;
+}
+
+.row .space {
+  width: 250px;
+}
+
+.row .backspace,
+.row .tab,
+.row .del,
+.row .win,
+.row .caps,
+.row .enter,
+.row .shift,
+.row .alt,
+.row .ctrl {
+  font-size: 16px;
+}
+
+.row .pressed-btn {
+  color: #ff7600;
+}
+
+.info {
+  font-size: 16px;
+}
+
+.info span {
+  font-size: 20px;
+}
+
+/*# sourceMappingURL=main.css.map*/
