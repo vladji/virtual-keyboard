@@ -90,14 +90,9 @@ export default class Model {
   }
 
   static keyDown(e) {
-    console.log(e.type, e.key, e.code);
     const key = document.querySelector(`.${e.code}`);
     if (key && !e.repeat) {
       Model.animation(null, key);
     }
-
-    // if (e.code === 'Tab') {
-    //   e.preventDefault();
-    // }
   }
 }
