@@ -27,6 +27,9 @@ export default class Model {
   inputClick() {
     const input = this.textArea;
     this.cursorPos = input.selectionEnd;
+    input.addEventListener('keydown', (e) => {
+      e.preventDefault();
+    });
   }
 
   keyUp(e) {

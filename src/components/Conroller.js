@@ -86,11 +86,5 @@ export default class Controller {
     });
 
     input.addEventListener('click', model.inputClick.bind(model));
-
-    input.addEventListener('select', () => {
-      console.log('select');
-      console.log(input.selectionStart);
-      console.log(input.selectionEnd);
-    });
   }
 }

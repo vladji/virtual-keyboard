@@ -20,25 +20,22 @@ export default class View {
     const keybordWrap = document.createElement('div');
     keybordWrap.classList = 'keybord-wrap';
 
-    for (let i = 0; i < 5;) {
+    for (let i = 0; i < 5; i += 1) {
       const row = document.createElement('div');
       row.classList = 'row';
       keybordWrap.append(row);
-      i += 1;
     }
 
     document.body.append(keybordWrap);
     const keysRow = keybordWrap.querySelectorAll('.row');
 
-    for (let k = 0; k < keysArr.length && k < keysRow.length;) {
-      for (let i = 0; i < keysArr[k].length;) {
+    for (let k = 0; k < keysArr.length && k < keysRow.length; k += 1) {
+      for (let i = 0; i < keysArr[k].length; i += 1) {
         const keyDiv = document.createElement('div');
         keyDiv.innerHTML = `${keysArr[k][i].val}`;
         keyDiv.classList = `${keysArr[k][i].class}`;
         keysRow[k].append(keyDiv);
-        i += 1;
       }
-      k += 1;
     }
 
     const info = document.createElement('p');
@@ -51,19 +48,17 @@ export default class View {
     const switchKeys = document.querySelectorAll('.switch');
 
     if (!caps) {
-      for (let i = 0; i < switchKeys.length;) {
+      for (let i = 0; i < switchKeys.length; i += 1) {
         let letter = switchKeys[i].innerHTML;
         letter = letter.toLowerCase();
         switchKeys[i].innerHTML = letter;
-        i += 1;
       }
       this.upperCase = false;
     } else {
-      for (let i = 0; i < switchKeys.length;) {
+      for (let i = 0; i < switchKeys.length; i += 1) {
         let letter = switchKeys[i].innerHTML;
         letter = letter.toUpperCase();
         switchKeys[i].innerHTML = letter;
-        i += 1;
       }
       this.upperCase = true;
     }
